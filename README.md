@@ -90,7 +90,8 @@ npm run start
     <a href="https://www.linkedin.com/in/arbazhussain10/">
         <img align="center" src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" alt="https://www.linkedin.com/in/arbazhussain10/" />
     </a>
-      <a title="arbazh777@gmail.com.com" href="mailto:arbazh777Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white" alt="arbazh777@gmail.com" />
+      <a title="arbazh777@gmail.com.com" href="mailto:arbazh777@gmail.com.com">
+        <img align="center" src="https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white" alt="arbazh777@gmail.com" />
     </a>
   <p>© 2022 Arbaz Hussain</p>
 </p>
