@@ -31,7 +31,7 @@ export const Invoices = () => {
   const [toggle, setToggle] = useState(true);
   return (
     <>
-    {/* Navbar component, and give the lower box 3rem margin top due to height of the fixed navbar */}
+      {/* Navbar component, and give the lower box 3rem margin top due to height of the fixed navbar */}
       <SecondaryNavbar />
       <Box mt="3rem">
         {/* Tab bar start here */}
@@ -196,11 +196,7 @@ export const Invoices = () => {
                           >
                             Next step
                           </Button>
-                          <Button
-                            border="1px solid gray"
-                            bg="white"
-                            h="2rem"
-                          >
+                          <Button border="1px solid gray" bg="white" h="2rem">
                             Cancel
                           </Button>
                         </Flex>

@@ -3,19 +3,18 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import SecNavDrawer from "./InvoiceComponents/SecNavDrawer";
 const SecondaryNavbar = () => {
+  let name = JSON.parse(localStorage.getItem("name"));
 
-  let name = JSON.parse(localStorage.getItem("name"))
-  
   return (
     <>
       <Box
-      zIndex='10'
+        zIndex="10"
         fontWeight="600"
         display={"flex"}
         justifyContent="space-around"
         alignItems={"center"}
         position={"fixed"}
-        top='0'
+        top="0"
         w="100%"
         h="3rem"
         bg="#ff6600"

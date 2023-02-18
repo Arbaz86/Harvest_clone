@@ -1,5 +1,3 @@
-
-
-export const footerReducer = (state=[], action) => {
-    return state;
-}
+export const footerReducer = (state = [], action) => {
+  return state;
+};

@@ -1,153 +1,187 @@
-import { Icon, SmallAddIcon } from '@chakra-ui/icons';
-import {Input, background, Box, Button, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Popover, PopoverArrow, PopoverBody, PopoverContent, PopoverTrigger, Select, Tab, useDisclosure, TabList, Tabs, TabPanels, TabPanel, Text } from '@chakra-ui/react';
-import React, { useEffect, useState } from 'react'
-import { IoIosArrowDown } from 'react-icons/io';
-import { Counter } from '../Components/counter';
-import time from "../module.css/time.module.css"
-import SecondaryFooter from './SecondaryFooter';
-import SecondaryNavbar from './SecondaryNavbar';
-import {v4 as uuid} from "uuid"
-import axios from 'axios';
-import { useSelector } from 'react-redux';
+import { Icon, SmallAddIcon } from "@chakra-ui/icons";
+import {
+  Input,
+  background,
+  Box,
+  Button,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
+  Popover,
+  PopoverArrow,
+  PopoverBody,
+  PopoverContent,
+  PopoverTrigger,
+  Select,
+  Tab,
+  useDisclosure,
+  TabList,
+  Tabs,
+  TabPanels,
+  TabPanel,
+  Text,
+} from "@chakra-ui/react";
+import React, { useEffect, useState } from "react";
+import { IoIosArrowDown } from "react-icons/io";
+import { Counter } from "../Components/counter";
+import time from "../module.css/time.module.css";
+import SecondaryFooter from "./SecondaryFooter";
+import SecondaryNavbar from "./SecondaryNavbar";
+import { v4 as uuid } from "uuid";
+import axios from "axios";
+import { useSelector } from "react-redux";
 
-  const projects = {
-    Exampl_project: {
-      client_name: "Vinod",
-      tasks: ["marketing", "programming"],
-    },
-    Alpha_nemeric: {
-      client_name: "bharat",
-      tasks: ["marketing", "programming"],
-    },
-  };
+const projects = {
+  Exampl_project: {
+    client_name: "Vinod",
+    tasks: ["marketing", "programming"],
+  },
+  Alpha_nemeric: {
+    client_name: "bharat",
+    tasks: ["marketing", "programming"],
+  },
+};
 // var tm=5000000
-const timeConverttToHour=(tm)=>{
-const second=Math.floor(tm/1000)
-const minute=Math.floor(second/60)
-const hour=Math.floor(minute/60)
-const remain_minute = minute%60
-return hour +':'+ remain_minute;
-}
-const timeConverttToSecond=(tm)=>{
-var check=tm.includes(":")
+const timeConverttToHour = (tm) => {
+  const second = Math.floor(tm / 1000);
+  const minute = Math.floor(second / 60);
+  const hour = Math.floor(minute / 60);
+  const remain_minute = minute % 60;
+  return hour + ":" + remain_minute;
+};
+const timeConverttToSecond = (tm) => {
+  var check = tm.includes(":");
 
-if(check){
-  var arr = tm.split(":");
-  let hour=+arr[0]*60*60
-  let minute=+arr[1]*60
-  console.log(arr)
- return hour+minute
-}
-else{
-  var hour=+tm*60*60
-  return hour
-}
-}
+  if (check) {
+    var arr = tm.split(":");
+    let hour = +arr[0] * 60 * 60;
+    let minute = +arr[1] * 60;
+    console.log(arr);
+    return hour + minute;
+  } else {
+    var hour = +tm * 60 * 60;
+    return hour;
+  }
+};
 
 export const Time = () => {
-    const token = useSelector((store) => store.AuthReducer.token);
+  const token = useSelector((store) => store.AuthReducer.token);
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [project_name,setProject_names]=useState([])
+  const [project_name, setProject_names] = useState([]);
   const [selected_project, setselected_project] = useState("");
-  const [tasks, settasks] = useState([])
-  const [selected_task,setselected_task]=useState("")
-  const [selected_day, setselected_day] = useState("day1")
-  const [week, setweek] = useState({day1:[],day2:[],day3:[],day4:[],day5:[],day6:[],day7:[]})
-  const [isClockRunning, setisClockRunning] = useState(false)
-  const [selectedTime, setselectedTime] = useState("0") 
-  const [project_data, setproject_data] = useState([]);    
+  const [tasks, settasks] = useState([]);
+  const [selected_task, setselected_task] = useState("");
+  const [selected_day, setselected_day] = useState("day1");
+  const [week, setweek] = useState({
+    day1: [],
+    day2: [],
+    day3: [],
+    day4: [],
+    day5: [],
+    day6: [],
+    day7: [],
+  });
+  const [isClockRunning, setisClockRunning] = useState(false);
+  const [selectedTime, setselectedTime] = useState("0");
+  const [project_data, setproject_data] = useState([]);
   //  console.log(tasks,"task");
 
   useEffect(() => {
-axios.get("https://mysterious-ridge-11647.herokuapp.com/project",{
-      headers: {
-        authorization: `bearer ${token}`,
-      },
-    }).then((res)=>setproject_data(()=>res.data)).catch((err)=>console.log(err));
-  }, [])
+    axios
+      .get("https://mysterious-ridge-11647.herokuapp.com/project", {
+        headers: {
+          authorization: `bearer ${token}`,
+        },
+      })
+      .then((res) => setproject_data(() => res.data))
+      .catch((err) => console.log(err));
+  }, []);
 
-  const handle_select_project=(e)=>{
-    setselected_project(()=>e.target.value)
-    var count=-1
-    for(var a=0;a<project_data.length;a++){
+  const handle_select_project = (e) => {
+    setselected_project(() => e.target.value);
+    var count = -1;
+    for (var a = 0; a < project_data.length; a++) {
       if (project_data[a].project_name === e.target.value) {
         count = a;
         // console.log(project_data[a].task);
       }
     }
-    console.log(count)
-    console.log(project_data[count].task,"hello");
- settasks(() => project_data[count].task);
-  }
-const handleSubmitWeek=()=>{
-  var work = [];
-  var arr = week.day1;
-
-  for (var a = 0; a < arr.length; a++) {
-    // console.log(arr[a])
-    const hour = arr[a].time;
-    
-    var tempwork = {
-      billable: hour,
-      notbillable: 0,
-      task: arr[a].task,
-      charge: 5,
-    };
-    work.push(tempwork);
-  }
-
-  var data = {
-    project_name: week.day1[0].project,
-    client_name: week.day1[0].client,
-    week_number: "Week 1",
-    emp_name: "Bharat Rozodkar",
-    work: work,
+    console.log(count);
+    console.log(project_data[count].task, "hello");
+    settasks(() => project_data[count].task);
   };
-  console.log(data);
-  
-  axios
-    .post("https://mysterious-ridge-11647.herokuapp.com/time", data, {
-      headers: {
-        authorization: `bearer ${token}`,
-      }
-    })
-    .then((r) => console.log(r.data))
-    .catch((err) => console.log(err));
+  const handleSubmitWeek = () => {
+    var work = [];
+    var arr = week.day1;
 
-}
+    for (var a = 0; a < arr.length; a++) {
+      // console.log(arr[a])
+      const hour = arr[a].time;
 
-  useEffect( () => {
-    var temp=[]
-    for(var key in projects){
-      var obj={}
-      obj.project_nm=key
+      var tempwork = {
+        billable: hour,
+        notbillable: 0,
+        task: arr[a].task,
+        charge: 5,
+      };
+      work.push(tempwork);
+    }
+
+    var data = {
+      project_name: week.day1[0].project,
+      client_name: week.day1[0].client,
+      week_number: "Week 1",
+      emp_name: "Bharat Rozodkar",
+      work: work,
+    };
+    console.log(data);
+
+    axios
+      .post("https://mysterious-ridge-11647.herokuapp.com/time", data, {
+        headers: {
+          authorization: `bearer ${token}`,
+        },
+      })
+      .then((r) => console.log(r.data))
+      .catch((err) => console.log(err));
+  };
+
+  useEffect(() => {
+    var temp = [];
+    for (var key in projects) {
+      var obj = {};
+      obj.project_nm = key;
       obj.cl_name = projects[key].client_name;
       temp.push(obj);
     }
-setProject_names(()=>[...temp]);
-  },[])
-const handleNewTime = () => {
-var timer = timeConverttToSecond(selectedTime);
-var cl_name=""
+    setProject_names(() => [...temp]);
+  }, []);
+  const handleNewTime = () => {
+    var timer = timeConverttToSecond(selectedTime);
+    var cl_name = "";
 
-for(var a=0;a<project_data.length;a++){
-  if (project_data[a].project_name === selected_project) {
-    cl_name = project_data[a].client_name;
-  }
-}
-  const data = {
-    task: selected_task,
-    project: selected_project,
-    client: cl_name,
-    time: timer,
-    id: uuid(),
+    for (var a = 0; a < project_data.length; a++) {
+      if (project_data[a].project_name === selected_project) {
+        cl_name = project_data[a].client_name;
+      }
+    }
+    const data = {
+      task: selected_task,
+      project: selected_project,
+      client: cl_name,
+      time: timer,
+      id: uuid(),
+    };
+    const temp = week;
+    week[selected_day].push(data);
+    setweek({ ...temp });
+
+    onClose();
   };
-  const temp = week;
-  week[selected_day].push(data);
-  setweek({ ...temp });
-
-  onClose()
-};
 
   return (
     <div>
@@ -181,7 +215,6 @@ for(var a=0;a<project_data.length;a++){
                 <p>Project / Task</p>
 
                 <Select
-                 
                   mt={3}
                   onChange={handle_select_project}
                   // setselected_project(e.target.value)
@@ -228,13 +261,14 @@ for(var a=0;a<project_data.length;a++){
                   placeholder="Select task"
                   mt={3}
                 >
-                  {tasks.length>0 && tasks.map((elem, index) => {
-                    return (
-                      <option key={index} value={elem.task_name}>
-                        {elem.task_name}
-                      </option>
-                    );
-                  })}
+                  {tasks.length > 0 &&
+                    tasks.map((elem, index) => {
+                      return (
+                        <option key={index} value={elem.task_name}>
+                          {elem.task_name}
+                        </option>
+                      );
+                    })}
                 </Select>
                 <Box mt={3}>
                   <Input placeholder="Notes (optional)" />
@@ -403,4 +437,4 @@ for(var a=0;a<project_data.length;a++){
       </Box>
     </div>
   );
-}
+};

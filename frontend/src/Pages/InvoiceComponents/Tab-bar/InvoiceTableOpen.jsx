@@ -1,11 +1,14 @@
-import { Box,  Table,
-    Thead,
-    Tbody,
-    Tfoot,
-    Tr,
-    Th,
-    Td,
-    TableContainer } from "@chakra-ui/react";
+import {
+  Box,
+  Table,
+  Thead,
+  Tbody,
+  Tfoot,
+  Tr,
+  Th,
+  Td,
+  TableContainer,
+} from "@chakra-ui/react";
 import React from "react";
 
 const data = [
@@ -19,7 +22,6 @@ const InvoiceTableOpen = () => {
     <Box>
       <TableContainer>
         <Table variant="simple" colorScheme="green">
-          
           <Thead>
             <Tr>
               <Th>Status</Th>
@@ -31,21 +33,23 @@ const InvoiceTableOpen = () => {
               <Th>Balance</Th>
             </Tr>
           </Thead>
-          <Tbody fontSize='14px'>
-           {data.map((ele)=>{
-            return  <Tr>
-             <Td>Draft</Td>
-             <Td>Not sent yet</Td>
-             <Td>{ele.date}</Td>
-             <Td>{ele.id}</Td>
-             <Td fontWeight='600'>{ele.client}</Td>
-             <Td></Td>
-             <Td fontWeight='600'>$ {ele.balance}</Td>
-           </Tr>
-           })}
+          <Tbody fontSize="14px">
+            {data.map((ele) => {
+              return (
+                <Tr>
+                  <Td>Draft</Td>
+                  <Td>Not sent yet</Td>
+                  <Td>{ele.date}</Td>
+                  <Td>{ele.id}</Td>
+                  <Td fontWeight="600">{ele.client}</Td>
+                  <Td></Td>
+                  <Td fontWeight="600">$ {ele.balance}</Td>
+                </Tr>
+              );
+            })}
           </Tbody>
           <Tfoot>
-          <Tr fontWeight='600'>
+            <Tr fontWeight="600">
               <Td></Td>
               <Td></Td>
               <Td></Td>

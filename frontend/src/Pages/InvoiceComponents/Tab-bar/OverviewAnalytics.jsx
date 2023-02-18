@@ -1,7 +1,7 @@
 import { QuestionOutlineIcon } from "@chakra-ui/icons";
 import { Box, Flex, Text } from "@chakra-ui/react";
 import React from "react";
-import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react'
+import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
 import InvoiceTableOpen from "./InvoiceTableOpen";
 import OverviewGraph from "../GraphAnalytics/OverviewGraph";
 
@@ -43,31 +43,35 @@ const OverviewAnalytics = () => {
         </Box>
       </Flex>
       {/* All invoice table */}
-      <Box mt='1.5rem'>
+      <Box mt="1.5rem">
         <Tabs>
-          <TabList gap='1rem'>
+          <TabList gap="1rem">
             <Tab
-             fontSize="14px"
-             _selected={{
-               fontWeight: "600",
-               borderBottom: "2px solid #ff8000",
-             }}
-             _hover={{ borderBottom: "2px solid #ff8000", fontWeight: "500" }}
-            >Open</Tab>
+              fontSize="14px"
+              _selected={{
+                fontWeight: "600",
+                borderBottom: "2px solid #ff8000",
+              }}
+              _hover={{ borderBottom: "2px solid #ff8000", fontWeight: "500" }}
+            >
+              Open
+            </Tab>
 
             <Tab
-             fontSize="14px"
-             _selected={{
-               fontWeight: "600",
-               borderBottom: "2px solid #ff8000",
-             }}
-             _hover={{ borderBottom: "2px solid #ff8000", fontWeight: "500" }}
-            >All invoices</Tab>
+              fontSize="14px"
+              _selected={{
+                fontWeight: "600",
+                borderBottom: "2px solid #ff8000",
+              }}
+              _hover={{ borderBottom: "2px solid #ff8000", fontWeight: "500" }}
+            >
+              All invoices
+            </Tab>
           </TabList>
 
           <TabPanels>
             <TabPanel>
-              <InvoiceTableOpen/>
+              <InvoiceTableOpen />
             </TabPanel>
             <TabPanel>
               <p>two!</p>
