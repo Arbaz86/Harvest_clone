@@ -2,40 +2,28 @@ const { Router } = require("express");
 const { authentication } = require("../middlewares/authentication");
 const { ProjectModel } = require("../models/project.model");
 
-const projectControl = Router();
+const projectController = Router();
 
-projectControl.post("/",authentication, async(req, res) => {
-    
-    const payload = req.body;
-    const new_data = new ProjectModel(payload)
-    console.log(new_data, 'new_data')
-    
+projectController.post("/", authentication, async (req, res) => {
+  const payload = req.body;
+  const new_data = new ProjectModel(payload);
+  console.log(new_data, "new_data");
 
-    await new_data.save()
-    
-    res.json({message:"Reached to the project add data section"})
+  await new_data.save();
 
-})
+  res.json({ message: "Reached to the project add data section" });
+});
 
+projectController.get("/", authentication, async (req, res) => {
+  const payload = req.body;
+  const new_data = await ProjectModel.find();
 
-projectControl.get("/",authentication, async(req, res) => {
-    
-    const payload = req.body;
-    const new_data = await ProjectModel.find()
-    
-    
+  res.json(new_data);
+});
+projectController.get("/", authentication, async (req, res) => {
+  const payload = req.body;
+  const new_data = await ProjectModel.find();
+  res.json(new_data);
+});
 
-   
-    
-    res.json(new_data)
-
-})
-projectControl.get("/",authentication, async(req, res) => {
-    const payload = req.body;
-    const new_data = await ProjectModel.find()
-    res.json(new_data)
-})
-
-module.exports = {
-    projectControl
-}
+module.exports = { projectController };

@@ -11,8 +11,8 @@ export const signup = (payload) => (dispatch) => {
       return { type: types.SIGNUP_SUCCESS, status: r.data.status };
     })
     .catch((e) => {
-      dispatch({ type: types.SIGNUP_FALIURE });
-      return { type: types.SIGNUP_FALIURE, status: false };
+      dispatch({ type: types.SIGNUP_FAILURE });
+      return { type: types.SIGNUP_FAILURE, status: false };
     });
 };
 
@@ -27,8 +27,7 @@ export const login = (params) => (dispatch) => {
       return { type: types.LOGIN_SUCCESS, token: r.data?.token };
     })
     .catch((e) => {
-      dispatch({ type: types.LOGIN_FALIURE });
-      return { type: types.LOGIN_FALIURE, status: false, error: e.message };
-
+      dispatch({ type: types.LOGIN_FAILURE });
+      return { type: types.LOGIN_FAILURE, status: false, error: e.message };
     });
 };

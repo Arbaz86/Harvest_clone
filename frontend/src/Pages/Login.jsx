@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from "react";
 import {
   Box,
@@ -14,7 +13,7 @@ import { ReactComponent as IconHarvest } from "../assets/IconHarvest.svg";
 import { Link, useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import { useDispatch } from "react-redux";
-import { login } from "../Redux/Authreducer/actions";
+import { login } from "../Redux/AuthReducer/actions";
 
 export const Login = () => {
   const [email, setEmail] = useState("");
@@ -30,22 +29,20 @@ export const Login = () => {
     };
 
     dispatch(login(payload)).then((r) => {
-      console.log(r,'logindata');
+      console.log(r, "logindata");
       if (r.type === "LOGIN_SUCCESS") {
         setEmail("");
         setPassword("");
-        localStorage.setItem("name",JSON.stringify(email))
-        
-        navigate("/manages")
-      }
-    }); 
-  };
+        localStorage.setItem("name", JSON.stringify(email));
 
+        navigate("/manages");
+      }
+    });
+  };
 
   useEffect(() => {
     document.title = "Sign in";
   }, []);
-
 
   return (
     <Container maxW="550px">
@@ -174,5 +171,4 @@ export const Login = () => {
       </Flex>
     </Container>
   );
-
 };

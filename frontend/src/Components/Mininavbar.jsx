@@ -3,42 +3,37 @@ import { Link, NavLink } from "react-router-dom";
 const links = [
   {
     to: "/report",
-    title: "Clients"
+    title: "Clients",
   },
   {
     to: "/report/a",
-    title: "Projects"
+    title: "Projects",
   },
   {
     to: "/report/b",
-    title: "Tasks"
+    title: "Tasks",
   },
   {
     to: "/report/c",
-    title: "Team"
-  }
+    title: "Team",
+  },
 ];
 
 // NavLinks
 const baseStyle = {
   color: "black",
-    textDecoration: "none",
-    cursor:"pointer"
-  
-  
+  textDecoration: "none",
+  cursor: "pointer",
 };
 
 const activeStyle = {
   color: "red",
-    textDecoration: "underline",
-    cursor:"pointer"
+  textDecoration: "underline",
+  cursor: "pointer",
 };
 
 function Mininavbar() {
-   
- 
-    return (
-        
+  return (
     <div style={{ display: "flex", gap: "2rem", justifyContent: "center" }}>
       {links.map((item) => (
         // activeStyle, or activeClass

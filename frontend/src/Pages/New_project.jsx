@@ -47,31 +47,31 @@ import SecondaryNavbar from "./SecondaryNavbar";
 const NewProject = () => {
   const token = useSelector((store) => store.AuthReducer.token);
   const [selected, setselected] = useState(0);
-  const [clientnames,setClientNames]=useState([])
+  const [clientnames, setClientNames] = useState([]);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const finalRef = React.useRef(null);
-  const [team_names, setteam] = useState(["Vinod Chaudhari"])
-  const [first_name, setfirst_name] = useState("")
-const [last_name, setlast_name] = useState("")
-const [name, setname] = useState("")
-const [selected_team,setselected_team]=useState([team_names[0]])
-const [charge, setcharge] = useState([0])
-const [selected_team_charge, setselected_team_charge] = useState([charge[0]]);
+  const [team_names, setteam] = useState(["Vinod Chaudhari"]);
+  const [first_name, setfirst_name] = useState("");
+  const [last_name, setlast_name] = useState("");
+  const [name, setname] = useState("");
+  const [selected_team, setselected_team] = useState([team_names[0]]);
+  const [charge, setcharge] = useState([0]);
+  const [selected_team_charge, setselected_team_charge] = useState([charge[0]]);
 
-const [client_name, setclient_name] = useState('')
-const [project_name, setproject_name] = useState("")
-const [start_date, setstart_date] = useState("")
-const [end_date, setend_date] = useState("")
-const [budget, setbudget] = useState(0)
-const navigate=useNavigate()
-var task = [
-  { task_name: "Business Development" },
-  { task_name: "Design" },
-  { task_name: "Marketing" },
-  { task_name: "Programming" },
-];
+  const [client_name, setclient_name] = useState("");
+  const [project_name, setproject_name] = useState("");
+  const [start_date, setstart_date] = useState("");
+  const [end_date, setend_date] = useState("");
+  const [budget, setbudget] = useState(0);
+  const navigate = useNavigate();
+  var task = [
+    { task_name: "Business Development" },
+    { task_name: "Design" },
+    { task_name: "Marketing" },
+    { task_name: "Programming" },
+  ];
 
-console.log(start_date, end_date);
+  console.log(start_date, end_date);
   var tasks = [
     "Business Development",
     "Design",
@@ -81,119 +81,114 @@ console.log(start_date, end_date);
   ];
 
   const Submit_project = () => {
-    
-    const team_data=[]
-    for(var a=0;a<selected_team.length;a++){
-      var obj={}
-      obj.emp_name=selected_team[a]
-     
-      const indexof = team_names.indexOf(selected_team[a])
+    const team_data = [];
+    for (var a = 0; a < selected_team.length; a++) {
+      var obj = {};
+      obj.emp_name = selected_team[a];
 
-       obj.charge = charge[indexof];
-      console.log(obj,"in")
+      const indexof = team_names.indexOf(selected_team[a]);
+
+      obj.charge = charge[indexof];
+      console.log(obj, "in");
       team_data.push(obj);
     }
-    const data={
+    const data = {
       client_name,
       project_name,
       budget,
       task,
       end_date,
-      date:start_date,
-      team:team_data
-    }
-    console.log(data)
+      date: start_date,
+      team: team_data,
+    };
+    console.log(data);
     axios
       .post("https://mysterious-ridge-11647.herokuapp.com/project", data, {
         headers: {
           authorization: `bearer ${token}`,
         },
-      }).then(()=>navigate("/projects"))
+      })
+      .then(() => navigate("/projects"))
       .catch((e) => console.log(e, "err"));
-  }
+  };
 
-const handleDeleteTeamMember=async(e)=>{
-  const {id}=e.target
-  console.log(e.target.id,"jk")
-      const temp = team_names;
-      var indexOfTeam=-1
-      for (let a = 0; a < temp.length; a++) {
-        // console.log(id,temp[a])
-        if (temp[a] === id) {
-          indexOfTeam = a;
+  const handleDeleteTeamMember = async (e) => {
+    const { id } = e.target;
+    console.log(e.target.id, "jk");
+    const temp = team_names;
+    var indexOfTeam = -1;
+    for (let a = 0; a < temp.length; a++) {
+      // console.log(id,temp[a])
+      if (temp[a] === id) {
+        indexOfTeam = a;
+        break;
+      }
+    }
+    temp.splice(indexOfTeam, 1);
+    await setteam(() => temp);
+    let index = -1;
+    var tempteam = selected_team;
+    for (let a = 0; a < tempteam.length; a++) {
+      if (temp[a] === id) {
+        index = a;
+        break;
+      }
+    }
+    if (index != -1) {
+      var tempcharge = charge;
+      tempteam.splice(index, 1);
+      tempcharge.splice(index, 1);
+      setcharge(() => tempcharge);
+      setselected(() => tempteam);
+    }
+  };
+  const handle_team_charge = async (e) => {
+    const { value, id } = e.target;
+    const temp = team_names;
+    var index = -1;
+    for (var a = 0; a < temp.length; a++) {
+      if (temp[a] === id) {
+        index = a;
+        break;
+      }
+    }
+    const tempcharge = charge;
+    tempcharge[index] = value;
+    console.log(tempcharge);
+    await setcharge(() => tempcharge);
+    console.log(charge);
+  };
+  const handlecheckbox = (e) => {
+    const { checked, id } = e.target;
+    var temp = selected_team;
+    var tempcharge = selected_team_charge;
+    // console.log(id,"nm")
+    if (checked) {
+      temp.push(id);
+      tempcharge.push(0);
+    }
+    if (!checked) {
+      let index = -1;
+      for (var a = 0; a < temp.length; a++) {
+        if (temp[a] == id) {
+          index = a;
           break;
         }
       }
-   temp.splice(indexOfTeam,1);
-  await setteam(()=>temp)
-  let index=-1
-  var tempteam = selected_team
-  for (let a = 0; a < tempteam.length; a++) {
-    if (temp[a] === id) {
-      index = a;
-      break;
-    }
-  }
-  if(index!=-1){
-    var tempcharge=charge
-    tempteam.splice(index,1)
-    tempcharge.splice(index, 1);
-    setcharge(()=>tempcharge)
-    setselected(() => tempteam);
-  }
-
-}
-  const handle_team_charge=async(e)=>{
-
-    const {value,id}=e.target
-    const temp = team_names;
-    var index=-1
-     for (var a = 0; a <temp.length; a++){
-       if (temp[a] === id) {
-         index = a;
-         break;
-       }
-     }
-     const tempcharge=charge
-      tempcharge[index]=value
-      console.log(tempcharge)
-   await setcharge(()=>tempcharge)
-   console.log(charge)
-
-  }
-  const handlecheckbox=(e)=>{
-
-   const {checked,id}=e.target
-    var temp = selected_team;
-    var tempcharge=selected_team_charge
-    // console.log(id,"nm")
-   if(checked){
-   temp.push(id)
-   tempcharge.push(0)
-   }
-   if (!checked) {
-
-    let index=-1
-    for(var a=0;a<temp.length;a++){
-      if(temp[a]==id){
-          index=a
-          break;
+      if (index > -1) {
+        temp.splice(index, 1);
+        tempcharge.splice(index, 1);
       }
     }
-    if (index > -1) { 
-      temp.splice(index, 1)
-      tempcharge.splice(index,1)
-    }
-   }
-  //  console.log(temp)
+    //  console.log(temp)
     setselected_team(temp);
-    setselected_team_charge(()=>tempcharge)
-  }
+    setselected_team_charge(() => tempcharge);
+  };
 
-  const handlenameadd=async()=>{
-   await setteam(()=>[...team_names, first_name + " " + last_name])
-  await  setcharge(()=>[...charge,0])
-  }
+  const handlenameadd = async () => {
+    await setteam(() => [...team_names, first_name + " " + last_name]);
+    await setcharge(() => [...charge, 0]);
+  };
 
   useEffect(() => {
     axios
@@ -202,10 +197,9 @@ const handleDeleteTeamMember=async(e)=>{
           authorization: `bearer ${token}`,
         },
       })
-      .then((res) =>  setClientNames(res.data))
+      .then((res) => setClientNames(res.data))
       .catch((e) => console.log(e, "err"));
-  },[]);
-
+  }, []);
 
   return (
     <div>
@@ -242,17 +236,18 @@ const handleDeleteTeamMember=async(e)=>{
                       type="text"
                       placeholder="Search by project or client"
                     ></input>
-                    {   clientnames.length>0 &&   clientnames.map((elem) => {
-                      return (
-                        <p
-                          id={elem.client_name}
-                          key={elem.client_name}
-                          onClick={(e) => setclient_name(() => e.target.id)}
-                        >
-                          {elem.client_name}
-                        </p>
-                      );
-                    })}
+                    {clientnames.length > 0 &&
+                      clientnames.map((elem) => {
+                        return (
+                          <p
+                            id={elem.client_name}
+                            key={elem.client_name}
+                            onClick={(e) => setclient_name(() => e.target.id)}
+                          >
+                            {elem.client_name}
+                          </p>
+                        );
+                      })}
                   </PopoverBody>
                 </PopoverContent>
               </Popover>
@@ -1016,7 +1011,7 @@ const handleDeleteTeamMember=async(e)=>{
           <button className={new_project.new_prj_cancel_btn}>Cancel</button>
         </div>
       </div>
-      <Box >
+      <Box>
         <SecondaryFooter />
       </Box>
     </div>

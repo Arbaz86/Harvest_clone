@@ -5,9 +5,9 @@ require("dotenv").config();
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
-const router = Router();
+const authController = Router();
 
-router.post("/signup", async (req, res) => {
+authController.post("/signup", async (req, res) => {
   const { firstName, lastName, company, email, password } = req.body;
 
   const isExist = await UserModel.find({ email });
@@ -48,49 +48,38 @@ router.post("/signup", async (req, res) => {
   });
 });
 
-router.post("/login", async (req, res) => {
-console.log("login come baba a")
+authController.post("/login", async (req, res) => {
+  console.log("login come baba a");
   const { email, password } = req.body;
-  
-  console.log(email, password, 'email password')
-  console.log("vinod1")
+
+  console.log(email, password, "email password");
 
   const user = await UserModel.find({ email });
-  console.log(user,'user')
+  console.log(user, "user");
   const hash = user[0]?.password;
-  console.log(hash,'hash', user.length)
+  console.log(hash, "hash", user.length);
 
   if (user.length === 1) {
- 
-   bcrypt.compare(password, hash, function (err, results) {
+    bcrypt.compare(password, hash, function (err, results) {
       if (err) {
-        console.log(err,'results')
+        console.log(err, "results");
         return res.status(400).send({ message: "Invalid Credentials" });
       } else if (results) {
-        console.log(results,'results')
-        var token= jwt.sign({ email }, process.env.SECRET_KEY, {
+        console.log(results, "results");
+        var token = jwt.sign({ email }, process.env.SECRET_KEY, {
           expiresIn: "2d",
         });
-       
-        
+
         return res
           .status(200)
           .send({ message: "Login Successfully", status: results, token });
       }
     });
   } else {
-    
-    res
-    .status(401)
-    .send({ message: "Login Successfully"});
+    res.status(401).send({ message: "Login Successfully" });
   }
 
-  console.log("before return failure;")
+  console.log("before return failure;");
+});
 
-  
-  });
-
-
-
-
-module.exports = router;
+module.exports = { authController };

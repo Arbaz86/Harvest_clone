@@ -1,104 +1,101 @@
 const { Router } = require("express");
 const { authentication } = require("../middlewares/authentication");
 const { ClientModel } = require("../models/client.mode");
-const clientControl = Router();
+const clientController = Router();
 
-clientControl.post("/", authentication,  async(req, res) => {
-    
-    const payload = req.body;
-    const new_data = new ClientModel(payload);
-    await new_data.save()
-    console.log(new_data,'new_data')
-    res.json({message:"Reached"})
+clientController.post("/", authentication, async (req, res) => {
+  const payload = req.body;
+  const new_data = new ClientModel(payload);
+  await new_data.save();
+  console.log(new_data, "new_data");
+  res.json({ message: "Reached" });
+});
+clientController.get("/", authentication, async (req, res) => {
+  // const { edit_id } = req.params;
+  const new_data1 = await ClientModel.find();
+  console.log(new_data1);
 
-})
-clientControl.get("/",authentication, async(req, res) => {
-    // const { edit_id } = req.params;
-    const new_data1 = await ClientModel.find();
-    console.log(new_data1)
-    
-    res.json(new_data1)
+  res.json(new_data1);
 
-    // const payload = req.body;
-    // const new_data = new ClientModel(payload);
-    // await new_data.save()
-    // console.log(new_data,'new_data')
-    // res.json({message:"Reached"})
+  // const payload = req.body;
+  // const new_data = new ClientModel(payload);
+  // await new_data.save()
+  // console.log(new_data,'new_data')
+  // res.json({message:"Reached"})
+});
 
-})
+clientController.patch("/edit/:edit_id", authentication, async (req, res) => {
+  const { edit_id } = req.params;
 
+  const new_data1 = await ClientModel.updateOne(
+    { _id: edit_id },
+    { ...req.body }
+  );
+  console.log(new_data1);
 
-clientControl.patch("/edit/:edit_id",authentication, async(req, res) => {
-    const { edit_id } = req.params;
+  res.json(new_data1);
 
+  // const payload = req.body;
+  // const new_data = new ClientModel(payload);
+  // await new_data.save()
+  // console.log(new_data,'new_data')
+  // res.json({message:"Reached"})
+});
 
-    const new_data1 = await ClientModel.updateOne({_id:edit_id},{...req.body});
-    console.log(new_data1)
-    
-    res.json(new_data1)
-
-    // const payload = req.body;
-    // const new_data = new ClientModel(payload);
-    // await new_data.save()
-    // console.log(new_data,'new_data')
-    // res.json({message:"Reached"})
-
-})
-
-clientControl.delete("/delete/:delete_id",authentication, async(req, res) => {
+clientController.delete(
+  "/delete/:delete_id",
+  authentication,
+  async (req, res) => {
     const { delete_id } = req.params;
-    console.log(delete_id,'deletid')
+    console.log(delete_id, "deletid");
 
-    const new_data1 = await ClientModel.deleteOne({_id:delete_id});
-    console.log(new_data1)
-    
-    res.json({message:"data deleted"})
+    const new_data1 = await ClientModel.deleteOne({ _id: delete_id });
+    console.log(new_data1);
+
+    res.json({ message: "data deleted" });
 
     // const payload = req.body;
     // const new_data = new ClientModel(payload);
     // await new_data.save()
     // console.log(new_data,'new_data')
     // res.json({message:"Reached"})
+  }
+);
 
-})
+clientController.post("/contact", authentication, async (req, res) => {
+  const payload = req.body;
+  const new_data = await ClientModel.updateOne(
+    { _id: "63380eafd7b98b0b98107a8c" },
+    {
+      $push: {
+        contacts: payload,
+      },
+    }
+  );
+  let vin = new_data.contacts;
 
-clientControl.post("/contact",authentication, async(req, res) => {
-    
-    const payload = req.body;
-    const new_data = await ClientModel.updateOne({ _id: "63380eafd7b98b0b98107a8c" },  {
-        $push: {
-            contacts: payload
-        }
-    });
-    let vin = new_data.contacts;
-    
-    console.log(new_data.contacts,'contacts')
-    console.log(new_data,'new_data')
+  console.log(new_data.contacts, "contacts");
+  console.log(new_data, "new_data");
 
-res.json({message:"Reached"})
+  res.json({ message: "Reached" });
+});
 
-})
+clientController.delete("/contact", authentication, async (req, res) => {
+  const payload = req.body;
+  const new_data = await ClientModel.updateOne(
+    { _id: "63380eafd7b98b0b98107a8c" },
+    {
+      $pull: {
+        contacts: { _id },
+      },
+    }
+  );
+  let vin = new_data.contacts;
 
+  console.log(new_data.contacts, "contacts");
+  console.log(new_data, "new_data");
 
+  res.json({ message: "Reached" });
+});
 
-clientControl.delete("/contact",authentication, async(req, res) => {
-    
-    const payload = req.body;
-    const new_data = await ClientModel.updateOne({ _id: "63380eafd7b98b0b98107a8c" },  {
-        $pull: {
-            contacts: {_id}
-        }
-    });
-    let vin = new_data.contacts;
-    
-    console.log(new_data.contacts,'contacts')
-    console.log(new_data,'new_data')
-
-
-    res.json({message:"Reached"})
-
-})
-
-module.exports = {
-    clientControl
-}
+module.exports = { clientController };

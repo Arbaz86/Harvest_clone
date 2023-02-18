@@ -1,63 +1,65 @@
 import { Button } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
-import counter from "../module.css/Counter.module.css"
+import counter from "../module.css/Counter.module.css";
 
-  
-    const timeconvert = (tm) => {
-      console.log(tm)
-      const hour = Math.floor(tm / 60);
-      const remain_minute = tm % 60;
-      return hour + ":" + remain_minute;
-    };
-   
+const timeConverter = (tm) => {
+  console.log(tm);
+  const hour = Math.floor(tm / 60);
+  const remain_minute = tm % 60;
+  return hour + ":" + remain_minute;
+};
 
-export const Counter = ({day,id, time, setisClockRunning, isClockRunning,setweek,week }) => {
-  const [vinod, setVinod] = useState(time);
-  var clock = timeconvert(vinod);
+export const Counter = ({
+  day,
+  id,
+  time,
+  setisClockRunning,
+  isClockRunning,
+  setWeek,
+  week,
+}) => {
+  const [timer, setTimer] = useState(time);
+  var clock = timeConverter(timer);
   const [state, setState] = useState(false);
   const handleStatus = () => {
     setState(() => !state);
   };
 
-
-
-
   const handleStop = () => {
-    var tempweek=week
+    var tempWeek = week;
     setState(() => !state);
-    var obj = tempweek[day];
+    var obj = tempWeek[day];
     // console.log(typeof())
     for (var key in obj) {
-      if(obj[key].id===id){
-
-        tempweek[day][key].time = vinod;
-        setweek(()=>tempweek)
+      if (obj[key].id === id) {
+        tempWeek[day][key].time = timer;
+        setWeek(() => tempWeek);
       }
     }
   };
   useEffect(() => {
-    if(vinod%1000===0){
-        var tempweek = week;
-         var obj = tempweek[day];
-         // console.log(typeof())
-         for (var key in obj) {
-           if (obj[key].id === id) {
-             tempweek[day][key].time = vinod;
-             setweek(() => tempweek);
-           }
-         }
+    if (timer % 1000 === 0) {
+      var tempWeek = week;
+      var obj = tempWeek[day];
+      // console.log(typeof())
+      for (var key in obj) {
+        if (obj[key].id === id) {
+          tempWeek[day][key].time = timer;
+          setWeek(() => tempWeek);
+        }
+      }
     }
 
     if (state === true) {
       setTimeout(() => {
-        setVinod((vinod) => vinod + 1);
+        setTimer((timer) => timer + 1);
       }, 1000);
     }
-  }, [vinod, state]);
+  }, [timer, state]);
 
   return (
     //     <div>
-    //   {vinod}
+    //   {timer}
     //       {isClockRunning?<button onClick={handleStop}>Stop</button>: <button onClick={handleStatus}>Start</button>}
 
     //     </div>

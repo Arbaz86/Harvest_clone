@@ -22,7 +22,7 @@ export const reducer = (state = initialState, action) => {
         isLoading: false,
       };
     }
-    case types.SIGNUP_FALIURE: {
+    case types.SIGNUP_FAILURE: {
       return {
         ...state,
         isLoading: false,
@@ -45,7 +45,7 @@ export const reducer = (state = initialState, action) => {
         token: payload,
       };
     }
-    case types.LOGIN_FALIURE: {
+    case types.LOGIN_FAILURE: {
       return {
         ...state,
         isLoading: false,
