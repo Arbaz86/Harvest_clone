@@ -27,7 +27,7 @@ export const Manage = () => {
   const navigate = useNavigate();
 
   const getClientsdata = async () => {
-    await fetch("https://mysterious-ridge-11647.herokuapp.com/client", {
+    await fetch("https://harvest-api.onrender.com/client", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

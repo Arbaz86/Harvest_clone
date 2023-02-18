@@ -4,7 +4,7 @@ import * as types from "./actionTypes";
 export const signup = (payload) => (dispatch) => {
   dispatch({ type: types.SIGNUP_REQUEST });
   return axios
-    .post("https://mysterious-ridge-11647.herokuapp.com/auth/signup", payload)
+    .post("https://harvest-api.onrender.com/auth/signup", payload)
     .then((r) => {
       dispatch({ type: types.SIGNUP_REQUEST, payload: r.data });
       console.log(r.data);
@@ -19,7 +19,7 @@ export const signup = (payload) => (dispatch) => {
 export const login = (params) => (dispatch) => {
   dispatch({ type: types.LOGIN_REQUEST });
   return axios
-    .post("https://mysterious-ridge-11647.herokuapp.com/auth/login", params)
+    .post("https://harvest-api.onrender.com/auth/login", params)
     .then((r) => {
       dispatch({ type: types.LOGIN_SUCCESS, payload: r.data.token });
 

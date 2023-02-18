@@ -92,7 +92,7 @@ export const Time = () => {
 
   useEffect(() => {
     axios
-      .get("https://mysterious-ridge-11647.herokuapp.com/project", {
+      .get("https://harvest-api.onrender.com/project", {
         headers: {
           authorization: `bearer ${token}`,
         },
@@ -141,7 +141,7 @@ export const Time = () => {
     console.log(data);
 
     axios
-      .post("https://mysterious-ridge-11647.herokuapp.com/time", data, {
+      .post("https://harvest-api.onrender.com/time", data, {
         headers: {
           authorization: `bearer ${token}`,
         },

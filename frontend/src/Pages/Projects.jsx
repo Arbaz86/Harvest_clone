@@ -21,19 +21,18 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useSelector } from "react-redux";
 
-
 const Projects = () => {
-  const [data, setdata] = useState([])
-      const token = useSelector((store) => store.AuthReducer.token);
-  console.log(data)
-  const navigte=useNavigate()
-  const handleclick=()=>{
+  const [data, setdata] = useState([]);
+  const token = useSelector((store) => store.AuthReducer.token);
+  console.log(data);
+  const navigte = useNavigate();
+  const handleclick = () => {
     navigte("/new_project");
-  }
+  };
 
   useEffect(() => {
     axios
-      .get("https://mysterious-ridge-11647.herokuapp.com/project", {
+      .get("https://harvest-api.onrender.com/project", {
         headers: {
           authorization: `bearer ${token}`,
         },
@@ -180,7 +179,7 @@ const Projects = () => {
                           />
                         </td>
                         <td className={project_page.cl_name}>
-                        {item.project_name}
+                          {item.project_name}
                         </td>
                         <td>{item.budget}</td>
                         <td>
@@ -220,8 +219,6 @@ const Projects = () => {
                       </tr>
                     </>
                   ))}
-            
-             
               </tbody>
             </table>
           </div>

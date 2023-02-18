@@ -137,7 +137,7 @@ export const Team = () => {
   }
 
   const getdata = async () => {
-    await fetch("https://mysterious-ridge-11647.herokuapp.com/time", {
+    await fetch("https://harvest-api.onrender.com/time", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

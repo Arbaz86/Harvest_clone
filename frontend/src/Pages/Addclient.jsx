@@ -26,7 +26,7 @@ export const AddClient = () => {
   };
 
   const addClients = async () => {
-    await fetch("https://mysterious-ridge-11647.herokuapp.com/client", {
+    await fetch("https://harvest-api.onrender.com/client", {
       method: "POST",
       body: JSON.stringify(payload),
       headers: {

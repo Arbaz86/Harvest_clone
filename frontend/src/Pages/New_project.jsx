@@ -103,7 +103,7 @@ const NewProject = () => {
     };
     console.log(data);
     axios
-      .post("https://mysterious-ridge-11647.herokuapp.com/project", data, {
+      .post("https://harvest-api.onrender.com/project", data, {
         headers: {
           authorization: `bearer ${token}`,
         },
@@ -192,7 +192,7 @@ const NewProject = () => {
 
   useEffect(() => {
     axios
-      .get("https://mysterious-ridge-11647.herokuapp.com/client", {
+      .get("https://harvest-api.onrender.com/client", {
         headers: {
           authorization: `bearer ${token}`,
         },

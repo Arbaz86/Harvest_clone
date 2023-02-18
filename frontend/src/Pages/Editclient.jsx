@@ -27,17 +27,14 @@ export const EditClient = () => {
       client_name,
       address,
     };
-    await fetch(
-      `https://mysterious-ridge-11647.herokuapp.com/client/edit/${edit_id}`,
-      {
-        method: "PATCH",
-        body: JSON.stringify(payload),
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `bearer ${token}`,
-        },
-      }
-    )
+    await fetch(`https://harvest-api.onrender.com/client/edit/${edit_id}`, {
+      method: "PATCH",
+      body: JSON.stringify(payload),
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `bearer ${token}`,
+      },
+    })
       .then((res) => res.json())
       .then((res) => {
         console.log(res);
@@ -52,16 +49,13 @@ export const EditClient = () => {
   };
 
   const deleteClient = async () => {
-    await fetch(
-      `https://mysterious-ridge-11647.herokuapp.com/client/delete/${edit_id}`,
-      {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `bearer ${token}`,
-        },
-      }
-    )
+    await fetch(`https://harvest-api.onrender.com/client/delete/${edit_id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `bearer ${token}`,
+      },
+    })
       .then((res) => navigate("/manages"))
       .catch((err) => {
         console.log(err);
