@@ -73,7 +73,7 @@ Harvest time tracking integrates all of your team logs and stores it in a single
 </ul>
 <h3>Setup</h3>
 ```
-git clone https://github.com/vin9012d/Harvest_clone.git
+git clone https://github.com/Arbaz86/Harvest_clone.git
 ```
 <h3>Install</h3>
 <p>To install all the dependences of the project, run the following command:</P>
