@@ -2,7 +2,7 @@
 <h2>Harvest is a time-tracking app for freelancers that includes invoicing, expensing, and team management features.   </h2>
 <div>
 <h1>Deployment link</h1>
-https://harvestappclone.netlify.app/
+https://getharvest-app-clone.netlify.app/
 </div>
 <h2>Tech stack used for the application</h2>
 <div>
@@ -73,7 +73,7 @@ Harvest time tracking integrates all of your team logs and stores it in a single
 </ul>
 <h3>Setup</h3>
 ```
-git clone https://github.com/vin9012d/Harvest_clone.git
+git clone https://github.com/Arbaz86/Harvest_clone.git
 ```
 <h3>Install</h3>
 <p>To install all the dependences of the project, run the following command:</P>
