@@ -45,10 +45,6 @@ export const Introdiv = () => {
           Free 30-day trial. No credit card required.
         </Text>
       </Box>
-      <Image
-        src="https://res.cloudinary.com/spiralyze/image/upload/f_auto/Harvest/1001-Harvest-Home-SPZ-Hero/desktop-hero-img.png"
-        className={styles.img2}
-      />
     </Flex>
   );
 };
