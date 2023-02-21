@@ -13,7 +13,7 @@ export const ErrorPage = () => {
       <Navbar />
 
       <Box
-        m="0px 3%"
+        p="0px 3%"
         bg="#fff8f1"
         pos="relative"
         h="80vh"
@@ -24,7 +24,7 @@ export const ErrorPage = () => {
         <Heading
           pos="absolute"
           as="h1"
-          fontSize="2vw"
+          fontSize={isSmallerThan540 ? "50vw" : "22vw"}
           fontFamily="monospace"
           opacity="0.04"
           noOfLines={1}
