@@ -9,10 +9,7 @@ passport.use(
       callbackURL: "http://localhost:8080/auth/google",
     },
     function (accessToken, refreshToken, profile, cb) {
-      //   User.findOrCreate({ googleId: profile.id }, function (err, user) {
-      //     return cb(err, user);
-      //   });
-      console.log(profile);
+      return cb(null, "user");
     }
   )
 );

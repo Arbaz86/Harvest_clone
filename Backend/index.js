@@ -26,14 +26,18 @@ app.get("/", (req, res) => {
 // google auth route
 app.get(
   "/auth/google",
-  passport.authenticate("google", { scope: ["profile"] })
+  passport.authenticate("google", { scope: ["profile", "email"] })
 );
 
 app.get(
   "/auth/google/callback",
-  passport.authenticate("google", { failureRedirect: "/login" }),
+  passport.authenticate("google", {
+    failureRedirect: "/login",
+    session: false,
+  }),
   function (req, res) {
     // Successful authentication, redirect home.
+    console.log(req.user);
     res.redirect("/");
   }
 );
