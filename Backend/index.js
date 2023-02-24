@@ -2,6 +2,7 @@ require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const { connection } = require("./configs/db");
+const { passport } = require("./configs/google-oauth");
 
 const { authController } = require("./routes/auth.routes");
 const { clientController } = require("./routes/client.route");
@@ -21,6 +22,21 @@ app.use("/project", projectController);
 app.get("/", (req, res) => {
   res.send("Welcome to the home pages");
 });
+
+// google auth route
+app.get(
+  "/auth/google",
+  passport.authenticate("google", { scope: ["profile"] })
+);
+
+app.get(
+  "/auth/google/callback",
+  passport.authenticate("google", { failureRedirect: "/login" }),
+  function (req, res) {
+    // Successful authentication, redirect home.
+    res.redirect("/");
+  }
+);
 
 app.listen(PORT, async () => {
   try {
