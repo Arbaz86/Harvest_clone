@@ -31,3 +31,19 @@ export const login = (params) => (dispatch) => {
       return { type: types.LOGIN_FAILURE, status: false, error: e.message };
     });
 };
+
+export const googleLogin = (params) => (dispatch) => {
+  dispatch({ type: types.LOGIN_REQUEST });
+  return axios
+    .post("https://harvest-api.onrender.com/auth/google", params)
+    .then((r) => {
+      dispatch({ type: types.LOGIN_SUCCESS, payload: r.data.token });
+
+      console.log(r.data);
+      return { type: types.LOGIN_SUCCESS, token: r.data?.token };
+    })
+    .catch((e) => {
+      dispatch({ type: types.LOGIN_FAILURE });
+      return { type: types.LOGIN_FAILURE, status: false, error: e.message };
+    });
+};

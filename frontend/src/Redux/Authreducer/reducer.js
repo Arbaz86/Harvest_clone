@@ -54,6 +54,32 @@ export const reducer = (state = initialState, action) => {
         isError: false,
       };
     }
+
+    // Google login logic
+    case types.GOOGLE_LOGIN_REQUEST: {
+      return {
+        ...state,
+        isLoading: true,
+      };
+    }
+    case types.GOOGLE_LOGIN_SUCCESS: {
+      saveLocalData("token", payload);
+      return {
+        ...state,
+        isLoading: false,
+        isAuth: true,
+        token: payload,
+      };
+    }
+    case types.GOOGLE_LOGIN_FAILURE: {
+      return {
+        ...state,
+        isLoading: false,
+        isAuth: false,
+        token: "",
+        isError: false,
+      };
+    }
     default: {
       return state;
     }
