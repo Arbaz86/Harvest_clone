@@ -3,7 +3,7 @@ const jwt = require("jsonwebtoken");
 const authentication = (req, res, next) => {
   if (!req.headers?.authorization) {
     res.status(401).json({
-      status: "fail",
+      status: false,
       message: "You are not logged in! Please log in to get access.",
     });
   }

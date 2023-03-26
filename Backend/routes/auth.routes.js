@@ -22,7 +22,7 @@ authController.post("/signup", async (req, res) => {
   bcrypt.hash(password, 8, async function (err, hash) {
     if (err) {
       return res.status(500).json({
-        status: "error",
+        status: false,
         message: "Something went wrong! Please try again later",
       });
     }
@@ -37,11 +37,11 @@ authController.post("/signup", async (req, res) => {
 
     user.save((err, success) => {
       if (err) {
-        return res.status(500).json({ message: err.message, status: "error" });
+        return res.status(500).json({ message: err.message, status: false });
       }
 
       return res.status(201).json({
-        status: "success",
+        status: true,
         message: "Signup successful!",
         ...success["_doc"],
       });
@@ -58,14 +58,14 @@ authController.post("/login", async (req, res) => {
   if (!user) {
     return res
       .status(401)
-      .json({ status: "fail", message: "Incorrect Email or Password!" });
+      .json({ status: false, message: "Incorrect Email or Password!" });
   }
 
   bcrypt.compare(password, hash, function (err, results) {
     if (err) {
       return res
         .status(400)
-        .json({ status: "fail", message: "Incorrect Email or Password!" });
+        .json({ status: false, message: "Incorrect Email or Password!" });
     }
     const token = jwt.sign({ email }, process.env.SECRET_KEY, {
       expiresIn: "2d",
@@ -73,7 +73,7 @@ authController.post("/login", async (req, res) => {
 
     return res
       .status(200)
-      .json({ status: "success", message: "Login Successfully", token });
+      .json({ status: true, message: "Login Successfully", token });
   });
 });
 
