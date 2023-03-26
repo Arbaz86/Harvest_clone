@@ -45,9 +45,9 @@ app.get(
 app.listen(PORT, async () => {
   try {
     await connection;
-    console.log("Connected to DB successfully");
+    console.log("> Connected to DB successfully");
   } catch (error) {
-    console.log("Failed to connect to DB :(");
+    console.log("> Failed to connect to DB :(");
   }
-  console.log("> Server is up and running on port : " + PORT);
+  console.log(`> Server is up and running on port : ${PORT}`);
 });

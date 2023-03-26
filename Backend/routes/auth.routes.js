@@ -21,65 +21,60 @@ authController.post("/signup", async (req, res) => {
 
   bcrypt.hash(password, 8, async function (err, hash) {
     if (err) {
-      return res
-        .status(500)
-        .send({ message: "Something went wrong! Please try again later" });
-    } else {
-      const user = await UserModel({
-        firstName,
-        lastName,
-        company,
-        email,
-        password: hash,
-      });
-
-      user.save((err, success) => {
-        if (err) {
-          return res.status(500).send({ message: err.message, status: false });
-        }
-
-        return res.status(201).send({
-          message: "Signup successful!",
-          ...success["_doc"],
-          status: true,
-        });
+      return res.status(500).json({
+        status: "error",
+        message: "Something went wrong! Please try again later",
       });
     }
+
+    const user = await UserModel({
+      firstName,
+      lastName,
+      company,
+      email,
+      password: hash,
+    });
+
+    user.save((err, success) => {
+      if (err) {
+        return res.status(500).json({ message: err.message, status: "error" });
+      }
+
+      return res.status(201).json({
+        status: "success",
+        message: "Signup successful!",
+        ...success["_doc"],
+      });
+    });
   });
 });
 
 authController.post("/login", async (req, res) => {
-  console.log("login come baba a");
   const { email, password } = req.body;
 
-  console.log(email, password, "email password");
+  const user = await UserModel.findOne({ email });
+  const hash = user?.password;
 
-  const user = await UserModel.find({ email });
-  console.log(user, "user");
-  const hash = user[0]?.password;
-  console.log(hash, "hash", user.length);
-
-  if (user.length === 1) {
-    bcrypt.compare(password, hash, function (err, results) {
-      if (err) {
-        console.log(err, "results");
-        return res.status(400).send({ message: "Invalid Credentials" });
-      } else if (results) {
-        console.log(results, "results");
-        var token = jwt.sign({ email }, process.env.SECRET_KEY, {
-          expiresIn: "2d",
-        });
-
-        return res
-          .status(200)
-          .send({ message: "Login Successfully", status: results, token });
-      }
-    });
-  } else {
-    res.status(401).send({ message: "Login Successfully" });
+  if (!user) {
+    return res
+      .status(401)
+      .json({ status: "fail", message: "Incorrect Email or Password!" });
   }
 
-  console.log("before return failure;");
+  bcrypt.compare(password, hash, function (err, results) {
+    if (err) {
+      return res
+        .status(400)
+        .json({ status: "fail", message: "Incorrect Email or Password!" });
+    }
+    const token = jwt.sign({ email }, process.env.SECRET_KEY, {
+      expiresIn: "2d",
+    });
+
+    return res
+      .status(200)
+      .json({ status: "success", message: "Login Successfully", token });
+  });
 });
 
 module.exports = { authController };
