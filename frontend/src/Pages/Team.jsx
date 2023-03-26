@@ -15,8 +15,8 @@ import React, { useEffect, useState } from "react";
 import { BsArrowLeftSquare, BsArrowRightSquare } from "react-icons/bs";
 import { useSelector } from "react-redux";
 import Mininavbar from "../Components/Mininavbar";
-import { Daytypes } from "../Components/Vinodmodal/Daytypes";
-import { Reporttable } from "../Components/Vinodmodal/Reporttable";
+import { Daytypes } from "../Components/TracksModal/Daytypes";
+import { Reporttable } from "../Components/TracksModal/Reporttable";
 import SecondaryFooter from "./SecondaryFooter";
 import SecondaryNavbar from "./SecondaryNavbar";
 

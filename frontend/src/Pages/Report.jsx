@@ -13,8 +13,8 @@ import {
   TabPanels,
   Tabs,
 } from "@chakra-ui/react";
-import { Daytypes } from "../Components/Vinodmodal/Daytypes";
-import { Reporttable } from "../Components/Vinodmodal/Reporttable";
+import { Daytypes } from "../Components/TracksModal/Daytypes";
+import { Reporttable } from "../Components/TracksModal/Reporttable";
 import { BsArrowLeftSquare, BsArrowRightSquare } from "react-icons/bs";
 import SecondaryNavbar from "./SecondaryNavbar";
 import SecondaryFooter from "./SecondaryFooter";

@@ -9,12 +9,12 @@ import {
   Spacer,
   Text,
 } from "@chakra-ui/react";
-import { Daytypes } from "../Components/Vinodmodal/Daytypes";
-import { Reporttable } from "../Components/Vinodmodal/Reporttable";
-import { Totalhours } from "../Components/Vinodmodal/Totalhours";
-import { Projectsbreakdown } from "../Components/Vinodmodal/Projectsbrekdown";
-import { Taskbreakdown } from "../Components/Vinodmodal/Taskbreakdown";
-import { Teamworktable } from "../Components/Vinodmodal/Teamwektable";
+import { Daytypes } from "../Components/TracksModal/Daytypes";
+import { Reporttable } from "../Components/TracksModal/Reporttable";
+import { Totalhours } from "../Components/TracksModal/Totalhours";
+import { Projectsbreakdown } from "../Components/TracksModal/Projectsbrekdown";
+import { Taskbreakdown } from "../Components/TracksModal/Taskbreakdown";
+import { Teamworktable } from "../Components/TracksModal/Teamwektable";
 import { BsArrowLeftSquare, BsArrowRightSquare } from "react-icons/bs";
 import { FormText } from "reactstrap";
 import SecondaryFooter from "./SecondaryFooter";
