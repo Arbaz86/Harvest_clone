@@ -38,14 +38,14 @@ export const EditClient = () => {
       .then((res) => res.json())
       .then((res) => {
         console.log(res);
-        navigate("/manages");
+        navigate(-1);
       })
       .catch((err) => {
         console.log(err);
       });
   };
-  const canceladd = () => {
-    navigate("/manage/client");
+  const cancelEdit = () => {
+    navigate(-1);
   };
 
   const deleteClient = async () => {
@@ -56,7 +56,7 @@ export const EditClient = () => {
         Authorization: `bearer ${token}`,
       },
     })
-      .then((res) => navigate("/manages"))
+      .then((res) => navigate(-1))
       .catch((err) => {
         console.log(err);
       });
@@ -136,7 +136,7 @@ export const EditClient = () => {
               fontWeight: "bold",
               borderRadius: "10px",
             }}
-            onClick={canceladd}
+            onClick={cancelEdit}
           >
             Cancel
           </Button>
