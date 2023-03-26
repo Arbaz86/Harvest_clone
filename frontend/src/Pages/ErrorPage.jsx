@@ -1,6 +1,6 @@
 import { Box, Flex, Heading, Text } from "@chakra-ui/react";
 import React from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { Footer } from "./HomepageComponents/components/footer/Footer";
 import { Navbar } from "./HomepageComponents/components/navbar/Navbar";
 import { useMediaQuery } from "@chakra-ui/react";
@@ -28,11 +28,12 @@ export const ErrorPage = () => {
           fontFamily="monospace"
           opacity="0.04"
           noOfLines={1}
+          cursor="default"
         >
           404
         </Heading>
 
-        <Box textAlign="center" fontFamily="unset">
+        <Box textAlign="center" fontFamily="unset" zIndex="1">
           <Text
             fontSize={isSmallerThan540 ? "40px" : "50px"}
             color="#1d1e1c"
@@ -57,7 +58,7 @@ export const ErrorPage = () => {
             color="#1d1e1c"
             fontSize={isSmallerThan540 ? "18px" : "20px"}
           >
-            <Link to="/">
+            <NavLink to="/">
               <Box
                 _hover={{ textDecoration: "underline" }}
                 color="#FA5D00"
@@ -65,9 +66,9 @@ export const ErrorPage = () => {
               >
                 Go to the Harvest homepage
               </Box>
-            </Link>
+            </NavLink>
             or
-            <Link to="/">
+            <NavLink to="/">
               <Box
                 _hover={{ textDecoration: "underline" }}
                 color="#FA5D00"
@@ -75,7 +76,7 @@ export const ErrorPage = () => {
               >
                 contact us
               </Box>
-            </Link>
+            </NavLink>
           </Flex>
         </Box>
       </Box>

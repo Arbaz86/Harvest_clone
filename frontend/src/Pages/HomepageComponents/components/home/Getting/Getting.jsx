@@ -50,7 +50,13 @@ export const Getting = () => {
         textAlign="center"
       >
         {GettingObj.map((el, i) => (
-          <Box key={i} bg="white" p="20px" borderRadius="8px">
+          <Box
+            key={i}
+            bg="white"
+            p="20px"
+            borderRadius="8px"
+            className={styles.containDiv}
+          >
             <Image src={el.img} m="auto" />
             <Text
               _hover={{ color: "#FA5D00" }}
