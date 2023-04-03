@@ -49,7 +49,7 @@ const Signup = () => {
       if (r.type === "SIGNUP_SUCCESS" && r.status === true) {
         return navigate("/login");
       } else if (r.type === "SIGNUP_SUCCESS" && r.status === false) {
-        alert("User Already Registerd, please login ");
+        alert("User Already Registered, please login ");
       }
     });
 
