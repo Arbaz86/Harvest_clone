@@ -1,5 +1,6 @@
 <h1 align="center"> Harvest Website Clone</h1>
-<h2 align="center">  GetHarvest is a powerful web application designed to streamline time tracking and project management. As part of a talented team of 4, I was responsible for creating the front-end and back-end of the Social Sign-in/Sign-up page, contributing to the website design, and developing a landing page. Our tech stack included HTML, CSS, JavaScript, React, Redux, Chakra UI, Node.js, Express.js, MongoDB, and Render. Within a short time frame of 6 days, we successfully developed and delivered a functional and efficient project management app with a sleek design and user-friendly interface </h2>
+<h2 align="center">  GetHarvest is a powerful web application designed to streamline time tracking and project management. <br/>
+As part of a talented team of 4, I was responsible for creating the front-end and back-end of the Social Sign-in/Sign-up page, contributing to the website design, and developing a landing page. <br/><br/> Our Tech stack included HTML, CSS, JavaScript, React, Redux, Chakra UI, Node.js, Express.js, MongoDB, and Render.<br/><br/> Within a short time frame of 6 days, we successfully developed and delivered a functional and efficient project management app with a sleek design and user-friendly interface </h2>
 
 <div>
 
