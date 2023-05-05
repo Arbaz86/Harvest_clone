@@ -18,7 +18,7 @@ https://getharvest-app-clone.netlify.app/
         <img src="https://img.shields.io/badge/npm-CB3837?style=for-the-badge&logo=npm&logoColor=white" alt="npm" />
             <img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white" alt="html5" />
     <img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white" alt="css3" />
-    <img src="https://img.shields.io/badge/Heroku-430098?style=for-the-badge&logo=heroku&logoColor=white" alt="heroku />
+    <img src="https://img.shields.io/badge/RENDER-4351e8?style=for-the-badge&logo=render&logoColor=51e8bf" alt="render" />
 </div>
 <p>
 Harvest time tracking integrates all of your team logs and stores it in a single, convenient location. It is a collaborative project built by a team of 4 and executed in 5 days.
@@ -69,8 +69,9 @@ Harvest time tracking integrates all of your team logs and stores it in a single
 <ul>
 <li>React</li>
 <li>Redux</li>
-<li>MongoDb</li>
-<li>Express</li>
+<li>Node.js</li>
+<li>MongoDB</li>
+<li>Express.js</li>
 <li>HTML</li>
 <li>CSS</li>
 </ul>
