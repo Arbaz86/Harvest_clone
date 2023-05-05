@@ -5,6 +5,8 @@ require("dotenv").config();
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
+const Email = require("../utils/sendEmail");
+
 const authController = Router();
 
 authController.post("/signup", async (req, res) => {
@@ -13,7 +15,7 @@ authController.post("/signup", async (req, res) => {
   const isExist = await UserModel.find({ email });
 
   if (isExist.length > 0) {
-    return res.json({
+    return res.status(404).json({
       message: "User Already Exist! Please login",
       status: false,
     });
@@ -35,10 +37,12 @@ authController.post("/signup", async (req, res) => {
       password: hash,
     });
 
-    user.save((err, success) => {
+    user.save(async (err, success) => {
       if (err) {
         return res.status(500).json({ message: err.message, status: false });
       }
+
+      await new Email(user).sendWelcomeEmail();
 
       return res.status(201).json({
         status: true,
@@ -61,7 +65,7 @@ authController.post("/login", async (req, res) => {
       .json({ status: false, message: "Incorrect Email or Password!" });
   }
 
-  bcrypt.compare(password, hash, function (err, results) {
+  bcrypt.compare(password, hash, async function (err, results) {
     if (err) {
       return res
         .status(400)
@@ -71,9 +75,11 @@ authController.post("/login", async (req, res) => {
       expiresIn: "2d",
     });
 
+    await new Email(user).sendWelcomeEmail();
+
     return res
       .status(200)
-      .json({ status: true, message: "Login Successfully", token });
+      .json({ status: true, message: "Successfully Login!", token });
   });
 });
 
