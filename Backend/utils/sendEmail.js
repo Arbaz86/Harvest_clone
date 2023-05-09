@@ -15,6 +15,8 @@ module.exports = class Email {
     this.to = user.email;
     // User first name
     this.firstName = user.firstName;
+
+    this.url = url;
     // Sender email address and name
     this.from = `GetHarvest <${process.env.EMAIL_FROM}>`;
   }
@@ -48,12 +50,13 @@ module.exports = class Email {
       fs.readFileSync(`${__dirname}/templates/${template}.ejs`, "utf-8"),
       {
         name: this.firstName,
+        url: this.url,
       }
     );
 
     // Email options
     const mailOptions = {
-      from: this.frm,
+      from: this.from,
       to: this.to,
       subject,
       html: renderedTemplate,
@@ -73,5 +76,9 @@ module.exports = class Email {
   // Send welcome email to user
   async sendWelcomeEmail() {
     await this.send("welcome-email", "Welcome to our website!");
+  }
+
+  async sendPasswordReset() {
+    await this.send("reset-password-email", "Reset your Harvest ID password");
   }
 };

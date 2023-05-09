@@ -82,5 +82,51 @@ authController.post("/login", async (req, res) => {
       .json({ status: true, message: "Successfully Login!", token });
   });
 });
+// Route handler for resetting user password
+authController.post("/forgotPassword", async (req, res) => {
+  // Check if a user with the given email exists in the database
+  const user = await UserModel.findOne({ email: req.body.email });
+
+  if (!user) {
+    // If no user is found with the given email, send an error response
+    return res.status(404).json({
+      status: false,
+      message: `There is no user with email address.`,
+    });
+  }
+
+  // Generate a password reset token for the user
+  const resetToken = user.createPasswordRestToken();
+
+  // Save the updated user document to the database
+  await user.save({ validateBeforeSave: false });
+
+  try {
+    // Generate the reset URL using the reset token
+    const resetURL = `http://localhost:3000/password_reset/${resetToken}/edit`;
+
+    // Send a password reset email to the user
+    await new Email(user, resetURL).sendPasswordReset();
+
+    // If the email is sent successfully, send a success response
+    return res.status(200).json({
+      status: true,
+      message: `A password reset email has been sent to ${req.body.email}.`,
+    });
+  } catch (error) {
+    // If there is an error sending the email, clear the password reset token and expiration date
+    user.passwordResetToken = undefined;
+    user.passwordResetExpires = undefined;
+
+    // Save the updated user document to the database
+    await user.save({ validateBeforeSave: false });
+
+    // Send an error response
+    return res.status(500).json({
+      status: false,
+      message: "There was an error sending the email. Try again later!",
+    });
+  }
+});
 
 module.exports = { authController };
