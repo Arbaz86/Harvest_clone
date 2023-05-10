@@ -21,7 +21,7 @@ export const ForgotPassword = () => {
     const handleSendLink = (e) => {
         e.preventDefault();
 
-        axios.post("http://localhost:8080/auth/forgotPassword", { email }).then(({ data }) => {
+        axios.post("https://harvest-api.onrender.com/auth/forgotPassword", { email }).then(({ data }) => {
             toast({
                 title: data.message,
                 status: data.status ? "success" : 'fail',
