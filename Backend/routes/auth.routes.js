@@ -2,7 +2,6 @@ const { Router } = require("express");
 const { UserModel } = require("../models/user.model");
 require("dotenv").config();
 
-const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const crypto = require("crypto");
 
@@ -96,7 +95,7 @@ authController.post("/forgotPassword", async (req, res) => {
 
   try {
     // Generate the reset URL using the reset token
-    const resetURL = `http://localhost:3000/password_reset/${resetToken}/edit`;
+    const resetURL = `https://getharvest-app-clone.netlify.app/password_reset/${resetToken}/edit`;
 
     // Send a password reset email to the user
     await new Email(user, resetURL).sendPasswordReset();
