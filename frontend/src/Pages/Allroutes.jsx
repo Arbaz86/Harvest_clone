@@ -18,6 +18,7 @@ import { Reportname } from "./Reportname";
 import Home from "./HomepageComponents/pages/home/Home";
 import WithNavFoot from "./WithNavFoot";
 import { ErrorPage } from "./ErrorPage";
+import { ForgotPassword } from "./ForgotPassword";
 
 export const AllRoutes = () => {
   return (
@@ -39,6 +40,7 @@ export const AllRoutes = () => {
       <Route path="/addclient" element={<AddClient />} />
       <Route path="/edit/:edit_id" element={<EditClient />} />
       <Route path="/reports/:name" element={<Reportname />} />
+      <Route path="/password_reset/new" element={<ForgotPassword />} />
       <Route path="*" element={<ErrorPage />} />
     </Routes>
   );

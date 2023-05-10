@@ -160,7 +160,9 @@ export const Login = () => {
         flexWrap="wrap"
       >
         <Text _hover={{ textDecoration: "underline" }} cursor="pointer">
-          Forgot password?
+          <Link to="/password_reset/new">
+            Forgot password?
+          </Link>
         </Text>
         <Text _hover={{ textDecoration: "underline" }} cursor="pointer">
           Terms of service
