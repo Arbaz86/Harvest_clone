@@ -8,7 +8,7 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
-import { AxisOptions, Chart } from "react-charts";
+// import { AxisOptions, Chart } from "react-charts";
 import { Box } from "@chakra-ui/react";
 
 const data = [

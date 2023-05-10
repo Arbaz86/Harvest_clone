@@ -8,7 +8,7 @@ import {
     useToast,
     Text,
 } from "@chakra-ui/react";
-import { ReactComponent as IconHarvest } from "../assets/IconHarvest.svg";
+import IconHarvest from "../assets/IconHarvest.svg";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
@@ -47,7 +47,7 @@ export const ForgotPassword = () => {
     return (
         <Container maxW="550px">
             <Box align="center" mt="15px" color="#1d1e1c">
-                <IconHarvest />
+                {/* <IconHarvest /> */}
                 <Heading mt="70px" fontSize="30px" fontWeight="700" lineHeight="36px">
                     Forgot your password?
                 </Heading>

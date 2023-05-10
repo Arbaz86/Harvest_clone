@@ -1,0 +1,12 @@
+{
+  "plugins": [
+    [
+      "inline-react-svg",
+      {
+        "svgo": {
+          "plugins": [{ "removeViewBox": false }]
+        }
+      }
+    ]
+  ]
+}
