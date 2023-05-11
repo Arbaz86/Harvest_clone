@@ -95,7 +95,7 @@ authController.post("/forgotPassword", async (req, res) => {
 
   try {
     // Generate the reset URL using the reset token
-    const resetURL = `https://getharvest-1683732837728.web.app/password_reset/${resetToken}/edit`;
+    const resetURL = `https://getharvest-1683732837728.web.app/edit?email=${req.body.email}&token=${resetToken}&user_id=${user._id}`;
 
     // Send a password reset email to the user
     await new Email(user, resetURL).sendPasswordReset();
@@ -138,7 +138,7 @@ authController.patch("/resetPassword/:token", async (req, res) => {
   if (!user) {
     return res
       .status(400)
-      .json({ status: true, message: "Token is invalid or has expired" });
+      .json({ status: false, message: "Token is invalid or has expired" });
   }
 
   // Check if the password and passwordConfirm fields in the request body match
@@ -161,7 +161,7 @@ authController.patch("/resetPassword/:token", async (req, res) => {
   // Send a success response
   return res
     .status(200)
-    .json({ status: false, message: "Password Reset Successfully!" });
+    .json({ status: true, message: "Password Reset Successfully!" });
 });
 
 module.exports = { authController };
