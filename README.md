@@ -5,7 +5,7 @@ As part of a talented team of 4, I was responsible for creating the front-end an
 <div>
 
 <h1>Deployment link</h1>
-https://getharvest-app-clone.netlify.app/
+https://getharvest-1683732837728.web.app/
 </div>
 <h2>Tech stack used for the application</h2>
 <div>
