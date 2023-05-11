@@ -7,7 +7,6 @@ const projectController = Router();
 projectController.post("/", authentication, async (req, res) => {
   const payload = req.body;
   const new_data = new ProjectModel(payload);
-  console.log(new_data, "new_data");
 
   await new_data.save();
 

@@ -18,12 +18,10 @@ timeController.post("/", authentication, async (req, res) => {
   if (!data) {
     const new_data = new TimeModel(payload);
     await new_data.save();
-    console.log(new_data, "new_data");
 
     res.json({ message: "data posted successfully" });
   } else {
     let newWorK = [];
-    console.log(data.work, "work");
 
     for (let i = 0; i < data.work.length; i++) {
       let flag = false;
@@ -36,14 +34,12 @@ timeController.post("/", authentication, async (req, res) => {
       }
 
       if (flag == false) {
-        console.log(data.work[i], "data wokk i fialing");
         newWorK.push({
           billable: data.work[i].billable,
           notbillable: data.work[i].notbillable,
           task: data.work[i].task,
           charge: data.work[i].charge,
         });
-        console.log(newWorK.at, "after push testing");
       }
     }
     for (let i = 0; i < work.length; i++) {

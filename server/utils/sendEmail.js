@@ -44,7 +44,6 @@ module.exports = class Email {
 
   // Send email with provided email template and subject
   async send(template, subject) {
-    console.log(subject);
     // Compile the email template with the user's name
     const renderedTemplate = await ejs.render(
       fs.readFileSync(`${__dirname}/templates/${template}.ejs`, "utf-8"),

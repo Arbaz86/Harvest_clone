@@ -7,20 +7,19 @@ clientController.post("/", authentication, async (req, res) => {
   const payload = req.body;
   const new_data = new ClientModel(payload);
   await new_data.save();
-  console.log(new_data, "new_data");
+
   res.json({ message: "Reached" });
 });
 clientController.get("/", authentication, async (req, res) => {
   // const { edit_id } = req.params;
   const new_data1 = await ClientModel.find();
-  console.log(new_data1);
 
   res.json(new_data1);
 
   // const payload = req.body;
   // const new_data = new ClientModel(payload);
   // await new_data.save()
-  // console.log(new_data,'new_data')
+
   // res.json({message:"Reached"})
 });
 
@@ -31,14 +30,13 @@ clientController.patch("/edit/:edit_id", authentication, async (req, res) => {
     { _id: edit_id },
     { ...req.body }
   );
-  console.log(new_data1);
 
   res.json(new_data1);
 
   // const payload = req.body;
   // const new_data = new ClientModel(payload);
   // await new_data.save()
-  // console.log(new_data,'new_data')
+
   // res.json({message:"Reached"})
 });
 
@@ -47,17 +45,15 @@ clientController.delete(
   authentication,
   async (req, res) => {
     const { delete_id } = req.params;
-    console.log(delete_id, "deletid");
 
     const new_data1 = await ClientModel.deleteOne({ _id: delete_id });
-    console.log(new_data1);
 
     res.json({ message: "data deleted" });
 
     // const payload = req.body;
     // const new_data = new ClientModel(payload);
     // await new_data.save()
-    // console.log(new_data,'new_data')
+
     // res.json({message:"Reached"})
   }
 );
@@ -74,9 +70,6 @@ clientController.post("/contact", authentication, async (req, res) => {
   );
   let vin = new_data.contacts;
 
-  console.log(new_data.contacts, "contacts");
-  console.log(new_data, "new_data");
-
   res.json({ message: "Reached" });
 });
 
@@ -91,9 +84,6 @@ clientController.delete("/contact", authentication, async (req, res) => {
     }
   );
   let vin = new_data.contacts;
-
-  console.log(new_data.contacts, "contacts");
-  console.log(new_data, "new_data");
 
   res.json({ message: "Reached" });
 });

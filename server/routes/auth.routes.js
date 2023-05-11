@@ -35,8 +35,6 @@ authController.post("/signup", async (req, res) => {
       return res.status(500).json({ message: err.message, status: false });
     }
 
-    await new Email(user).sendWelcomeEmail();
-
     return res.status(201).json({
       status: true,
       message: "Signup successful!",
@@ -95,7 +93,7 @@ authController.post("/forgotPassword", async (req, res) => {
 
   try {
     // Generate the reset URL using the reset token
-    const resetURL = `https://getharvest-1683732837728.web.app/resetPassword/edit?email=${req.body.email}&token=${resetToken}&user_id=${user._id}`;
+    const resetURL = `https://getharvest-1683732837728.web.app/password_reset/edit?email=${req.body.email}&token=${resetToken}&user_id=${user._id}`;
 
     // Send a password reset email to the user
     await new Email(user, resetURL).sendPasswordReset();
