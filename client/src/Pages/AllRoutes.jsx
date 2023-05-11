@@ -29,13 +29,13 @@ export const AllRoutes = () => {
       <Route path="/login" element={<Login />} />
       <Route path="/Signup" element={<Signup />} />
       <Route path="/time" element={<Time />} />
-      <Route path="/expenses" element={<Expenses />} />
+      {/* <Route path="/expenses" element={<Expenses />} /> */}
       <Route path="/projects" element={<Projects />} />
       <Route path="/new_project" element={<NewProject />} />
       <Route path="/team" element={<Team />} />
       <Route path="/report" element={<Report />} />
       <Route path="/invoices" element={<Invoices />} />
-      <Route path="/estimates" element={<Estimates />} />
+      {/* <Route path="/estimates" element={<Estimates />} /> */}
       <Route path="/manages" element={<Manage />} />
       <Route path="/addclient" element={<AddClient />} />
       <Route path="/edit/:edit_id" element={<EditClient />} />

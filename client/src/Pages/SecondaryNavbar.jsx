@@ -108,7 +108,8 @@ const SecondaryNavbar = () => {
             <NavLink to="/manages">Manage</NavLink>
           </Flex>
         </Box>
-        <Box>
+
+        <Box pt="13px">
           <Text display={"flex"} gap="10px" alignItems="center" color="white">
             <Avatar size="sm" src="https://bit.ly/broken-link" />
             {name}

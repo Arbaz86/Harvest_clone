@@ -16,6 +16,7 @@ import {
   Input,
   Text,
   useMediaQuery,
+  useToast,
 } from "@chakra-ui/react";
 
 const initState = {
@@ -31,6 +32,7 @@ const Signup = () => {
   const [isSmallerThan768] = useMediaQuery("(max-width: 768px)");
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const toast = useToast()
 
   const { firstName, lastName, company, email, password } = formData;
 
@@ -45,9 +47,28 @@ const Signup = () => {
 
     dispatch(signup(formData)).then((r) => {
       if (r.type === "SIGNUP_SUCCESS" && r.status === true) {
-        return navigate("/login");
+        toast({
+          title: "Signup Successfully!",
+          status: "success",
+          duration: 2000,
+          isClosable: true,
+          variant: "top-accent",
+          position: "top",
+        })
+
+        setTimeout(() => {
+          return navigate("/login");
+        }, 3000)
+
       } else if (r.type === "SIGNUP_SUCCESS" && r.status === false) {
-        alert("User Already Registered, please login ");
+        toast({
+          title: "User Already Registered, please login",
+          status: "fail",
+          duration: 2000,
+          isClosable: true,
+          variant: "top-accent",
+          position: "top",
+        })
       }
     });
 

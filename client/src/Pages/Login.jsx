@@ -8,6 +8,7 @@ import {
   Icon,
   Input,
   Text,
+  useToast,
 } from "@chakra-ui/react";
 // import { ReactComponent as IconHarvest } from "../assets/IconHarvest.svg";
 import { Link, useNavigate } from "react-router-dom";
@@ -20,6 +21,7 @@ export const Login = () => {
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const toast = useToast()
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -34,8 +36,19 @@ export const Login = () => {
         setEmail("");
         setPassword("");
         localStorage.setItem("name", JSON.stringify(email));
+        toast({
+          title: "Login Successfully!",
+          status: "success",
+          duration: 2000,
+          isClosable: true,
+          variant: "top-accent",
+          position: "top",
+        })
 
-        navigate("/manages");
+        setTimeout(() => {
+          navigate("/manages");
+        }, 3000)
+
       }
     });
   };
